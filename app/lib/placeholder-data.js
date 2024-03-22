@@ -12,9 +12,9 @@ const users = [
 const customers = [
   {
     id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
-    name: 'Delba de Oliveira',
-    email: 'delba@oliveira.com',
-    image_url: '/customers/delba-de-oliveira.png',
+    name: 'Fransiska Artha Apriani',
+    email: '221712139@students.uajy.ac.id',
+    image_url: '/customers/siska.jpg',
   },
   {
     id: '3958dc9e-742f-4377-85e9-fec4b6a6442a',
@@ -180,9 +180,19 @@ const revenue = [
   { month: 'Dec', revenue: 4800 },
 ];
 
+const reservations = [
+   {
+        customer_id: customers[0].id,
+        amount: 15795,
+        status: 'pending',
+        date: '2022-12-06',
+      },
+]
+
 module.exports = {
   users,
   customers,
   invoices,
   revenue,
+  reservations,
 };
