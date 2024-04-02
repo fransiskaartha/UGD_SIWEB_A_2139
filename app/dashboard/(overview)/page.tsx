@@ -49,7 +49,7 @@ export default async function Page() {
             <Suspense fallback={<LatestInvoicesSkeleton />}>
                 <LatestInvoices />
             </Suspense>
-            {/* { <LatestReservations latestReservations={latestReservations} /> } */}
+            { <LatestReservations latestReservations={latestReservations} /> }
         </div>
         </main >
     );

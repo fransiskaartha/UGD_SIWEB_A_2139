@@ -1,12 +1,12 @@
-import Pagination from '@/app/ui/invoices/pagination';
+import Pagination from '@/app/ui/reservations/pagination';
 import Search from '@/app/ui/search';
 import Table from '@/app/ui/reservations/table';
-import { CreateReservations } from '@/app/ui/invoices/buttons';
+import { CreateReservations } from '@/app/ui/reservations/buttons';
 import { kanit } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import {
   ReservationsTableSkeleton,
-  LatestReservationsSkeleton,
+  // LatestReservationsSkeleton,
   SearchReservationsSkeleton,
   CreateReservationsSkeleton
 } from '@/app/ui/skeletons';
@@ -20,12 +20,13 @@ export default async function Page({
     page?: string;
   };
 }) {
-  console.log('Fetching revenue data...');
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  // console.log('Fetching revenue data...');
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
 
   const totalPages = await fetchReservationsPages(query);
+
   return (
     <div className="w-full">
       <div>
@@ -43,12 +44,12 @@ export default async function Page({
           <CreateReservations />
         </Suspense>
       </div>
-
-      <div className="mt-5 flex w-full justify-center">
-      </div>
-      <Suspense fallback={<ReservationsTableSkeleton />}>
-        <Table query="" currentPage={1} />
+      <Suspense key={query + currentPage} fallback={<ReservationsTableSkeleton />}>
+        <Table query={query} currentPage={currentPage} />
       </Suspense>
-    </div>
-  );
+      <div className="mt-5 flex w-full justify-center">
+        </div>
+        <Pagination totalPages={totalPages} />
+      </div>
+      );
 }

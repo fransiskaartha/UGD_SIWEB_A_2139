@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { UpdateReservations, DeleteReservations } from '@/app/ui/reservations/button';
+import { UpdateReservations, DeleteReservations } from '@/app/ui/reservations/buttons';
 import ReservationsStatus from '@/app/ui/reservations/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredReservations } from '@/app/lib/data';

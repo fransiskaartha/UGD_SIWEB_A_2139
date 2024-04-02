@@ -3,6 +3,7 @@ import {
   CustomerField,
   CustomersTableType,
   InvoiceForm,
+  ReservationsForm,
   InvoicesTable,
   ReservationsTable,
   LatestInvoiceRaw,
@@ -254,6 +255,32 @@ export async function fetchInvoiceById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
+  }
+}
+
+export async function fetchReservationsById(id: string) {
+  unstable_noStore()
+  try {
+    const data = await sql<ReservationsForm>`
+      SELECT
+      reservations.id,
+      reservations.customer_id,
+      reservations.amount,
+      reservations.status
+      FROM reservations
+      WHERE reservations.id = ${id};
+    `;
+
+    const reservations = data.rows.map((reservations) => ({
+      ...reservations,
+      // Convert amount from cents to dollars
+      amount: reservations.amount / 100,
+    }));
+
+    return reservations[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch reservations.');
   }
 }
 
