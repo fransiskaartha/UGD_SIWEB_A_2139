@@ -16,7 +16,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
     params.set('page', pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
-  // NOTE: comment in this code when you get to this point in the course
+  // NOTE: comment in this code when you get to this point in the course (ini apa ya)
 
   // const allPages = generatePagination(currentPage, totalPages);
 

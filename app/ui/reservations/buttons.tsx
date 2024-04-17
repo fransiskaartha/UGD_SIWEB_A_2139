@@ -3,6 +3,7 @@ import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 // import { resolve } from 'path';
 
+//create reservations
 export async function CreateReservations() {
   await new Promise((resolve) => setTimeout (resolve, 500));
   return (
@@ -16,6 +17,7 @@ export async function CreateReservations() {
   );
 }
 
+//update reservations
 export function UpdateReservations({ id }: { id: string }) {
   return (
     <Link
@@ -27,6 +29,7 @@ export function UpdateReservations({ id }: { id: string }) {
   );
 }
 
+//delete
 export function DeleteReservations({ id }: { id: string }) {
   const deleteReservationsWithId = deleteReservations.bind(null, id);
   return (
