@@ -251,6 +251,7 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
+    console.log(invoice); // Invoice is an empty array []
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
@@ -277,6 +278,7 @@ export async function fetchReservationsById(id: string) {
       amount: reservations.amount / 100,
     }));
 
+    console.log(reservations); // Invoice is an empty array []
     return reservations[0];
   } catch (error) {
     console.error('Database Error:', error);

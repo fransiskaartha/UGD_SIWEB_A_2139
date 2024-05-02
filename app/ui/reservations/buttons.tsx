@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 //create reservations
 export async function CreateReservations() {
-  await new Promise((resolve) => setTimeout (resolve, 500));
   return (
     <Link
       href="/dashboard/reservations/create"
