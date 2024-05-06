@@ -9,7 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
-import { updateReservations } from '@/app/lib/actions';
+import { updateReservation } from '@/app/lib/actions';
 
 export default function EditReservationsForm({
   reservations,
@@ -18,7 +18,7 @@ export default function EditReservationsForm({
   reservations: ReservationsForm;
   customers: CustomerField[];
 }) {
-  const updateReservationsWithId = updateReservations.bind(null, reservations.id);
+  const updateReservationsWithId = updateReservation.bind(null, reservations.id);
 
   return (
     <form action={updateReservationsWithId}>

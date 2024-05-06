@@ -10,9 +10,11 @@ import {
   LatestReservationRaw,
   User,
   Revenue,
+  CustomerForm,
 } from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore } from 'next/cache';
+import { custom } from 'zod';
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -232,6 +234,21 @@ export async function fetchReservationsPages(query: string)
   }
 }
 
+export async function fetchCustomersPages(query: string) {
+  unstable_noStore()
+  try {
+    const count = await sql`SELECT COUNT(*)
+    FROM customers
+  `;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of customers.');
+  }
+}
+
 export async function fetchInvoiceById(id: string) {
   unstable_noStore()
   try {
@@ -256,6 +273,31 @@ export async function fetchInvoiceById(id: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
+  }
+}
+
+export async function fetchCustomerById(id: string) {
+  unstable_noStore();
+  try {
+    const data = await sql<CustomerForm>`
+      SELECT
+        customers.id,
+        customers.name,
+        customers.email,
+        customers.image_url
+      FROM customers
+      WHERE customers.id = ${id};
+    `;
+
+    const customers = data.rows.map((customer) => ({
+      ...customer,
+    }));
+
+    console.log(customers);
+    return customers[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch customer.');
   }
 }
 
@@ -287,7 +329,7 @@ export async function fetchReservationsById(id: string) {
 }
 
 export async function fetchCustomers() {
-  // unstable_noStore()
+  unstable_noStore()
   try {
     const data = await sql<CustomerField>`
       SELECT
