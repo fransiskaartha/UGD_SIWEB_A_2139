@@ -80,13 +80,13 @@ export async function updateInvoice(id: string, formData: FormData) {
 export async function deleteInvoice(id: string) {
   // throw new Error('Failed to Delete Invoice');
 
-  // try {
+  try {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
     revalidatePath('/dashboard/invoices');
     return { message: 'Deleted Invoice.' };
-  // } catch (error) {
-  //   return { message: 'Database Error: Failed to Delete Invoice.' };
-  // }
+  } catch (error) {
+    return { message: 'Database Error: Failed to Delete Invoice.' };
+  }
 }
 
 export async function createCustomer(formData: FormData) {
@@ -189,9 +189,20 @@ export async function updateReservation(id: string, formData: FormData) {
   redirect('/dashboard/reservations');
 }
 
-export async function deleteReservation(id: string) {
-  await sql`DELETE FROM reservations WHERE id = ${id}`;
-  revalidatePath('/dashboard/reservations');
+// export async function deleteReservation(id: string) {
+//   await sql`DELETE FROM reservations WHERE id = ${id}`;
+//   revalidatePath('/dashboard/reservations');
+// }
+export async function deleteReservations(id: string) {
+  // throw new Error('Failed to Delete Reservations');
+
+  try {
+    await sql`DELETE FROM reservations WHERE id = ${id}`;
+    revalidatePath('dashboard/reservations');
+    return { message: 'Deleted Reservations.' };
+  } catch (error) {
+    return { message: 'Database Error: Failed to Delete Reservations.' };
+  }
 }
 
 

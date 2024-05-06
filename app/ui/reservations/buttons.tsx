@@ -1,4 +1,4 @@
-import { deleteReservation } from '@/app/lib/actions';
+import { deleteReservations } from '@/app/lib/actions';
 import { PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 // import { resolve } from 'path';
@@ -30,7 +30,7 @@ export function UpdateReservations({ id }: { id: string }) {
 
 //delete
 export function DeleteReservations({ id }: { id: string }) {
-  const deleteReservationsWithId = deleteReservation.bind(null, id);
+  const deleteReservationsWithId = deleteReservations.bind(null, id);
   return (
     <form action={deleteReservationsWithId}>
       <button className="rounded-md border p-2 hover:bg-gray-100">
