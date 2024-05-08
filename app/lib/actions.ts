@@ -4,7 +4,27 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
+}
 
 const FormSchema = z.object({
   id: z.string(),
@@ -78,7 +98,7 @@ export async function updateInvoice(id: string, formData: FormData) {
 }
 
 export async function deleteInvoice(id: string) {
-  // throw new Error('Failed to Delete Invoice');
+  throw new Error('Failed to Delete Invoice');
 
   try {
     await sql`DELETE FROM invoices WHERE id = ${id}`;
@@ -189,12 +209,12 @@ export async function updateReservation(id: string, formData: FormData) {
   redirect('/dashboard/reservations');
 }
 
-// export async function deleteReservation(id: string) {
+// export async function8deleteReservation(id: string) {
 //   await sql`DELETE FROM reservations WHERE id = ${id}`;
 //   revalidatePath('/dashboard/reservations');
 // }
 export async function deleteReservations(id: string) {
-  // throw new Error('Failed to Delete Reservations');
+  throw new Error('Failed to Delete Reservations');
 
   try {
     await sql`DELETE FROM reservations WHERE id = ${id}`;
