@@ -51,6 +51,9 @@ export default function Page() {
 
               </div>
               <div className="flex items-center space-x-4 text-lg font-bold tracking-tight">
+              <Link
+              href="/dashboard"
+            >
                 <button
                   className="hidden md:block px-6 py-2 text-white text-smtransition duration-500 ease-out text-xs bg-transparent rounded-lg border border-white hover:bg-white-800 hover:ease-in hover:underline shadow-none"
                 >Login</button
@@ -60,6 +63,7 @@ export default function Page() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                   </svg>
                 </button>
+                </Link>
               </div>
             </div>
           </nav>
